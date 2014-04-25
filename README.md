@@ -1,5 +1,3 @@
-
-
 ## Cloudera Search Examples
 
 ### Pubmed Abstract Search
@@ -8,24 +6,37 @@
 
 ### Creating a Solr collection
 
+To generate sample configuration run the following solrct command.
+
 ```sh
 solrctl instancedir --generate pubmed
-
 ```
 
+Once you've created the sample configuration, you will edit schema.xml to have the appropriate field and field type information.  Additionally you can edit solrconfig to change the default search query field or add additional handlers.
+
+After creating the config, push it to Zookepper with 
+
 ```sh
-solrctl instancedir --update pubmed pubmed
+solrctl instancedir --create pubmed pubmed
 ```
 
 To update the configuration at any point you can do
 ```sh
-solrctl instancedir --create pubmed pubmed
+solrctl instancedir --update pubmed pubmed
+```
+
+Then you can create a collection associated with that configuration
+```sh
 solrctl --solr http://<your-domain-here>:8983/solr collection --create pubmed
 ```
 
 ## Runnning batch indexing on Hadoop
 
 ### Setting up a morphline configuration
+
+```sh
+TODO
+```
 
 ### Batch Indexing MR Job
 
@@ -40,5 +51,3 @@ org.apache.solr.hadoop.MapReduceIndexerTool
 --zk-host <your-zk-host-here>:2181/solr 
 --collection pubmed 
 <your-namenode-here>/path/to/input
-
-### Basic Cloudera Example
